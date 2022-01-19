@@ -49,7 +49,15 @@ export async function fetchVin(vin: string) {
   try {
     const res = await fetch(
       `https://api.rti.toyota.com/marketplace-inventory/vehicles/${vin}?isVspec=true`,
-      { timeout: 30000 }
+      {
+        timeout: 30000,
+        headers: {
+          origin: "https://guest.dealer.toyota.com",
+          referer: "https://guest.dealer.toyota.com/",
+          "user-agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246",
+        },
+      }
     );
 
     if (res.status === 200) {
